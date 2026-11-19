@@ -43,7 +43,7 @@ function App() {
       });
   }, [filter]);
 
-  // Adicionar nova carta
+  
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -82,7 +82,7 @@ function App() {
     }
   }
 
-  // Escolher carta aleatória
+  
   function pickRandom() {
     fetch("http://localhost:3000/api/cartas/aleatoria")
       .then((res) => {
@@ -100,7 +100,7 @@ function App() {
       });
   }
 
-  // Filtrar e ordenar cartas
+  
   let visible = cards.filter((card) => {
     const matchesSearch = card.name
       .toLowerCase()
@@ -113,12 +113,12 @@ function App() {
     visible = [...visible].sort((a, b) => b.attack - a.attack);
   }
 
-  // Estado de carregamento
+  
   if (loading) {
     return <h2>A carregar...</h2>;
   }
 
-  // Erro ao carregar cartas
+  
   if (error) {
     return <h2>Erro ao carregar cartas: {error}</h2>;
   }

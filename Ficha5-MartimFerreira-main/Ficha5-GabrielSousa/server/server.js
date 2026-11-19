@@ -10,7 +10,7 @@ let cards = JSON.parse(
   fs.readFileSync(filePath, "utf8")
 );
 
-// API de todas as cartas e filtro por tipo
+
 app.get("/api/cartas", (req, res) => {
   res.set(
     "Access-Control-Allow-Origin",
@@ -26,7 +26,6 @@ app.get("/api/cartas", (req, res) => {
   res.json(filteredCards);
 });
 
-// EXTRA 1 - API de carta aleatória
 app.get("/api/cartas/aleatoria", (req, res) => {
   res.set(
     "Access-Control-Allow-Origin",
@@ -38,7 +37,7 @@ app.get("/api/cartas/aleatoria", (req, res) => {
   res.json(card);
 });
 
-// Função para criar páginas HTML
+
 function page(title, body) {
   return `<!DOCTYPE html>
 <html lang="pt">
@@ -59,7 +58,7 @@ function page(title, body) {
 </html>`;
 }
 
-// Página inicial
+
 app.get("/", (req, res) => {
   res.send(page(
     "A minha coleção",
@@ -67,7 +66,7 @@ app.get("/", (req, res) => {
   ));
 });
 
-// Página sobre
+
 app.get("/sobre", (req, res) => {
   res.send(page(
     "Sobre",
@@ -75,7 +74,7 @@ app.get("/sobre", (req, res) => {
   ));
 });
 
-// Página das cartas
+
 app.get("/cartas", (req, res) => {
   const items = cards
     .map((card) => `<li><b>${card.name}</b> — ${card.type}, ataque ${card.attack}</li>`)
@@ -109,7 +108,7 @@ app.post("/api/cartas", (req, res) => {
 
   res.status(201).json(card);
 });
-// Página HTML de carta aleatória
+
 app.get("/cartas/aleatoria", (req, res) => {
   const card = cards[Math.floor(Math.random() * cards.length)];
 
@@ -120,7 +119,7 @@ app.get("/cartas/aleatoria", (req, res) => {
   ));
 });
 
-// Página da hora atual
+
 app.get("/agora", (req, res) => {
   const now = new Date().toLocaleString("pt-PT", {
     dateStyle: "long",
@@ -130,7 +129,7 @@ app.get("/agora", (req, res) => {
   res.send(page("Agora", `<p>Este pedido foi respondido às <b>${now}</b>.</p>`));
 });
 
-// Erro 404
+
 app.use((req, res) => {
   res.set(
     "Access-Control-Allow-Origin",
@@ -144,7 +143,7 @@ app.use((req, res) => {
   ));
 });
 
-// Iniciar servidor
+
 app.listen(PORT, () => {
   console.log(`Server a correr em http://localhost:${PORT}`);
 });
